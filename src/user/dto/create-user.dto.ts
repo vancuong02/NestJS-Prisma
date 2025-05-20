@@ -1,6 +1,6 @@
 import { Role } from '@prisma/client'
 import { Type } from 'class-transformer'
-import { IsEmail, IsString, IsOptional, ValidateNested, MinLength } from 'class-validator'
+import { IsEmail, IsString, IsOptional, ValidateNested, MinLength, IsNotEmpty } from 'class-validator'
 
 export class ProfileDto {
     @IsString()
@@ -19,7 +19,12 @@ export class ProfileDto {
 }
 
 export class CreateUserDto {
+    @IsNotEmpty()
+    @IsString()
+    name: string
+
     @IsEmail()
+    @IsString()
     email: string
 
     @IsString()

@@ -1,98 +1,196 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS E-commerce Project với Prisma
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Mô tả
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Dự án E-commerce được xây dựng bằng NestJS framework và Prisma ORM, hỗ trợ thanh toán online.
 
-## Description
+## Cài đặt project
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```
+npm install
 ```
 
-## Compile and run the project
+## Cấu hình Database
 
-```bash
-# development
-$ npm run start
+1. Cấu trúc Schema
 
-# watch mode
-$ npm run start:dev
+- User & Auth
+- Profile Management
+- Media Management
+- Product Management
+- Cart & Order Management
+- Online Payment
 
-# production mode
-$ npm run start:prod
+2. Khởi tạo Database
+
+```
+npx prisma migrate dev --name init
 ```
 
-## Run tests
+## Các lệnh Prisma CLI quan trọng
 
-```bash
-# unit tests
-$ npm run test
+1. Khởi tạo Prisma
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+npx prisma init
 ```
 
-## Deployment
+2. Tạo và áp dụng migration
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```
+npx prisma migrate dev --name ten_migration
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+3. Reset database
 
-## Resources
+```
+npx prisma migrate reset
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+4. Xem database qua GUI
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
+npx prisma studio
+```
 
-## Support
+5. Push schema lên DB
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+npx prisma db push
+```
 
-## Stay in touch
+6. Pull schema từ DB
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+npx prisma db pull
+```
 
-## License
+7. Generate Prisma Client
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+npx prisma generate
+```
+
+## Cấu trúc Database
+
+### 1. User & Auth
+
+```
+model User {
+  id            String    @id @default(uuid())
+  name          String    
+  email         String    @unique
+  password      String
+  role          Role      @default(USER)
+  profile       Profile?
+  orders        Order[]
+  cart          Cart?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+```
+
+### 2. Profile
+
+```
+model Profile {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  user          User      @relation(fields: 
+  [userId], references: [id])
+  firstName     String
+  lastName      String
+  phoneNumber   String?
+  address       String?
+  avatar        Media?    
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+```
+
+### 3. Media
+
+```
+model Media {
+  id            String    @id @default(uuid())
+  url           String
+  type          String
+  profile       Profile[]
+  products      Product[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+```
+
+### 4. Product
+
+```
+model Product {
+  id            String    @id @default(uuid())
+  name          String
+  description   String
+  price         Float
+  stock         Int
+  images        Media[]
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+```
+
+### 5. Cart & Order
+
+```
+model Cart {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  user          User      @relation(fields: 
+  [userId], references: [id])
+  items         CartItem[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Order {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: 
+  [userId], references: [id])
+  items         OrderItem[]
+  status        OrderStatus @default(PENDING)
+  totalAmount   Float
+  payment       Payment?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+```
+
+### 6. Payment
+
+```
+model Payment {
+  id            String    @id @default(uuid())
+  orderId       String    @unique
+  order         Order     @relation(fields: 
+  [orderId], references: [id])
+  amount        Float
+  provider      String
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED  
+  FAILED
+  REFUNDED
+}
+```
