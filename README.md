@@ -194,3 +194,23 @@ enum PaymentStatus {
   REFUNDED
 }
 ```
+
+# Prisma Query Cheatsheet
+
+## 📘 BẢNG TỔNG HỢP CÂU LỆNH QUERY PRISMA
+
+| STT | Hành động                   | Câu lệnh Prisma                                  | Ví dụ                                                                                                       |
+| --- | --------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| 1   | Tạo mới bản ghi             | `create()`                                       | `prisma.user.create({ data: { name: "Alice", email: "alice@example.com" } })`                               |
+| 2   | Lấy 1 bản ghi duy nhất      | `findUnique()`                                   | `prisma.user.findUnique({ where: { id: 1 } })`                                                              |
+| 3   | Lấy nhiều bản ghi           | `findMany()`                                     | `prisma.user.findMany()`                                                                                    |
+| 4   | Lọc, phân trang, sắp xếp    | `findMany({ where, orderBy, take, skip })`       | `prisma.user.findMany({ where: { role: "ADMIN" }, orderBy: { createdAt: "desc" }, take: 10, skip: 0 })`     |
+| 5   | Đếm số lượng bản ghi        | `count()`                                        | `prisma.user.count({ where: { role: "USER" } })`                                                            |
+| 6   | Cập nhật bản ghi            | `update()`                                       | `prisma.user.update({ where: { id: 1 }, data: { name: "Bob" } })`                                           |
+| 7   | Cập nhật nhiều bản ghi      | `updateMany()`                                   | `prisma.user.updateMany({ where: { role: "USER" }, data: { active: false } })`                              |
+| 8   | Xóa bản ghi                 | `delete()`                                       | `prisma.user.delete({ where: { id: 1 } })`                                                                  |
+| 9   | Xóa nhiều bản ghi           | `deleteMany()`                                   | `prisma.user.deleteMany({ where: { active: false } })`                                                      |
+| 10  | Lấy dữ liệu liên kết        | `include` trong `findMany()` hoặc `findUnique()` | `prisma.user.findMany({ include: { posts: true } })`                                                        |
+| 11  | Truy ngược dữ liệu liên kết | `include` trong `findUnique()`                   | `prisma.post.findUnique({ where: { id: 1 }, include: { author: true } })`                                   |
+| 12  | Aggregate (Tổng hợp)        | `aggregate({ _count, _avg, _sum })`              | `prisma.user.aggregate({ _count: true, _avg: { age: true } })`                                              |
+| 13  | Raw SQL truy vấn thủ công   | `$queryRaw` hoặc `$executeRaw`                   | `prisma.$queryRaw`\`SELECT \* FROM "User" WHERE "email" = '[test@example.com](mailto:test@example.com)'\`\` |

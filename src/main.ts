@@ -1,7 +1,8 @@
-import { NestFactory } from '@nestjs/core'
+import { NestFactory, Reflector } from '@nestjs/core'
 import { ConfigService } from '@nestjs/config'
 import { BadRequestException, ValidationPipe, VersioningType } from '@nestjs/common'
 import { AppModule } from './app.module'
+import { TransformInterceptor } from './core/transform.interceptor'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
@@ -19,6 +20,11 @@ async function bootstrap() {
             whitelist: true,
         }),
     )
+
+    const reflector = app.get(Reflector)
+
+    // Config Interceptor
+    app.useGlobalInterceptors(new TransformInterceptor(reflector))
 
     // Config CORS
     app.enableCors({
