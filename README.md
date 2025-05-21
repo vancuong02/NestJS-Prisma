@@ -214,3 +214,25 @@ enum PaymentStatus {
 | 11  | Truy ngược dữ liệu liên kết | `include` trong `findUnique()`                   | `prisma.post.findUnique({ where: { id: 1 }, include: { author: true } })`                                   |
 | 12  | Aggregate (Tổng hợp)        | `aggregate({ _count, _avg, _sum })`              | `prisma.user.aggregate({ _count: true, _avg: { age: true } })`                                              |
 | 13  | Raw SQL truy vấn thủ công   | `$queryRaw` hoặc `$executeRaw`                   | `prisma.$queryRaw`\`SELECT \* FROM "User" WHERE "email" = '[test@example.com](mailto:test@example.com)'\`\` |
+
+# Mongoose Query Cheatsheet
+
+## 📘 BẢNG TỔNG HỢP CÂU LỆNH QUERY MONGOOSE
+
+| STT | Hành động                           | Câu lệnh Mongoose           | Ví dụ                                                    |
+| --- | ----------------------------------- | --------------------------- | -------------------------------------------------------- |
+| 1   | Tạo bản ghi mới                     | `Model.create()`            | `User.create({ name: "Alice", age: 25 })`                |
+| 2   | Lấy tất cả bản ghi                  | `Model.find()`              | `User.find()`                                            |
+| 3   | Lấy bản ghi theo điều kiện          | `Model.find({})`            | `User.find({ age: { $gt: 18 } })`                        |
+| 4   | Lấy 1 bản ghi duy nhất              | `Model.findOne()`           | `User.findOne({ email: "abc@gmail.com" })`               |
+| 5   | Lấy bản ghi theo ID                 | `Model.findById()`          | `User.findById("64aa...123")`                            |
+| 6   | Cập nhật 1 bản ghi                  | `Model.updateOne()`         | `User.updateOne({ _id: id }, { name: "Bob" })`           |
+| 7   | Cập nhật và trả về bản ghi mới      | `Model.findByIdAndUpdate()` | `User.findByIdAndUpdate(id, { age: 30 }, { new: true })` |
+| 8   | Cập nhật nhiều bản ghi              | `Model.updateMany()`        | `User.updateMany({ active: true }, { role: "member" })`  |
+| 9   | Xóa 1 bản ghi theo điều kiện        | `Model.deleteOne()`         | `User.deleteOne({ email: "abc@gmail.com" })`             |
+| 10  | Xóa theo ID                         | `Model.findByIdAndDelete()` | `User.findByIdAndDelete(id)`                             |
+| 11  | Xóa nhiều bản ghi                   | `Model.deleteMany()`        | `User.deleteMany({ role: "guest" })`                     |
+| 12  | Đếm số bản ghi                      | `Model.countDocuments()`    | `User.countDocuments({ active: true })`                  |
+| 13  | Phân trang                          | `.skip().limit()`           | `User.find().skip(10).limit(5)`                          |
+| 14  | Sắp xếp                             | `.sort()`                   | `User.find().sort({ createdAt: -1 })`                    |
+| 15  | Lấy bản ghi kèm liên kết (populate) | `.populate()`               | `Post.find().populate('author')`                         |
